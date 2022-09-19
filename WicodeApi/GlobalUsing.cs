@@ -14,7 +14,8 @@ global using Newtonsoft.Json;
 global using WicodeApi.Customs;
 global using WicodeApi.Models;
 global using System.ComponentModel.DataAnnotations.Schema;
-//global
+global using Microsoft.AspNetCore.Authorization;
+//global 
 //global
 //global
 //global

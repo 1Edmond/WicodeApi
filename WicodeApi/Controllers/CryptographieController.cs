@@ -2,6 +2,7 @@
 
 [Route("cryptographie")]
 [ApiController]
+[Authorize]
 public class CryptographieController : ControllerBase
 {
     private readonly WicodeApiContext _context;
@@ -13,6 +14,7 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("inscriptions")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> GetInscription()
     {
         ApiResult<Inscription> result = new()
@@ -47,6 +49,7 @@ public class CryptographieController : ControllerBase
     }
     [HttpGet]
     [Route("inscriptions/exist/{contact}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> ExistInscription(string contact)
     {
         var result = new ApiResult<Inscription>();
@@ -60,6 +63,7 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("inscriptions/{id:int}/payements")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> GetInscriptionPayement(int id)
     {
         var result = new ApiResult<Payement>();
@@ -97,6 +101,7 @@ public class CryptographieController : ControllerBase
 
     [HttpDelete]
     [Route("inscriptions/delete/{id:int}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> InscriptionDelete(int id)
     {
         var result = new ApiResult<Inscription>();
@@ -119,6 +124,7 @@ public class CryptographieController : ControllerBase
 
     [HttpPut]
     [Route("inscriptions/update")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> UpdateInscription(Inscription inscription)
     {
         try
@@ -156,26 +162,6 @@ public class CryptographieController : ControllerBase
         }
     }
 
-    [HttpGet]
-    [Route("inscriptions/execut/{commande}&{valeur}")]
-    public ActionResult<string> ExecuteRequet(string commande, string valeur)
-    {
-        var result = new ApiResult<Inscription>();
-        try
-        {
-            var rep = _context.Inscriptions.FromSqlRaw(commande, valeur);
-            result.Message = "Commande efféctuée avec succès";
-            result.StatusCode = "200";
-            result.Results = rep.ToList();
-        }
-        catch (Exception)
-        {
-            result.Message = "Commande non efféctuée.";
-            result.StatusCode = "500";
-        }
-        return JsonConvert.SerializeObject(result);
-    }
-
 
     #endregion
 
@@ -183,7 +169,8 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("payements")]
-    public ActionResult<string> GetPayement()
+    [Authorize(Roles = "Admin")]
+    public ActionResult<string> GetPayements()
     {
         ApiResult<Payement> result = new()
         {
@@ -196,6 +183,7 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("payements/{id:int}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> GetPayement(int id)
     {
         var result = new ApiResult<Payement>();
@@ -248,6 +236,7 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("payements/delete/{id:int}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> PayementDelete(int id)
     {
         var result = new ApiResult<Payement>();
@@ -273,6 +262,7 @@ public class CryptographieController : ControllerBase
 
     [HttpPut]
     [Route("payements/update")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> UpdatePayement(Payement payement)
     {
         try
@@ -313,6 +303,7 @@ public class CryptographieController : ControllerBase
 
     [HttpGet]
     [Route("payements/exist/{reference}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<string> ExistPayement(string reference)
     {
         var result = new ApiResult<Payement>();
@@ -323,31 +314,6 @@ public class CryptographieController : ControllerBase
             (result.StatusCode, result.Message) = ("200", "false");
         return JsonConvert.SerializeObject(result);
     }
-
-    //[HttpGet]
-    //[Route("payements/execut/{commande}")]
-    //public ActionResult<string> ExecuteRequet(string commande, string valeur)
-    //{
-    //    var result = new ApiResult<Payement>();
-    //    try
-    //    {
-    //        var rep = _context.Payements.FromSqlRaw(commande, valeur);
-    //        result.Message = "Commande efféctuée avec succès";
-    //        result.StatusCode = "200";
-    //        result.Results = rep.ToList();
-    //    }
-    //    catch (Exception)
-    //    {
-    //        result.Message = "Commande non efféctuée.";
-    //        result.StatusCode = "500";
-    //    }
-    //    return JsonConvert.SerializeObject(result);
-    //}
-
-
-
-
-
 
     #endregion
 
