@@ -7,6 +7,10 @@ public class WicodeApiContext : DbContext
     {
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseNpgsql(@"Host=ec2-54-204-241-136.compute-1.amazonaws.com;Username=txmwmwfrxofkfk;Password=bacc105f9c8727672368fcad96af94fde9e1a267f21b31ca931af50afd78b4e4;Database=damfo3htosel2k");
+
+
     public DbSet<Inscription> Inscriptions { get; set; } = default!;
     public DbSet<Payement> Payements { get; set; } = default!;
     public DbSet<Projet> Projets { get; set; } = default!;

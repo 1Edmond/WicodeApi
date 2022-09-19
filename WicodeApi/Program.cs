@@ -5,6 +5,7 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddDbContext<WicodeApiContext>(options =>
 {
@@ -16,8 +17,10 @@ builder.Services.AddDbContext<WicodeApiContext>(options =>
     else // In Development Environment
     {
         // So, use a local Connection
-        options.UseSqlServer(builder.Configuration.GetConnectionString("WicodeApiContext") ?? throw new InvalidOperationException("Connection string 'WicodeApiContext' not found."));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("WicodeApiContext"));
     }
+
+
 });
 
 
