@@ -19,7 +19,7 @@ namespace WicodeApi.Migrations
                     Libelle = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DateAjout = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Etat = table.Column<int>(type: "smallint", nullable: false)
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0)
                 },
                 constraints: table =>
                 {
@@ -33,7 +33,7 @@ namespace WicodeApi.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Libelle = table.Column<string>(type: "text", nullable: true),
-                    Etat = table.Column<int>(type: "smallint", nullable: false),
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0),
                     DateAjout = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace WicodeApi.Migrations
                     Nom = table.Column<string>(type: "text", nullable: true),
                     Prenom = table.Column<string>(type: "text", nullable: true),
                     Contact = table.Column<string>(type: "text", nullable: true),
-                    Etat = table.Column<int>(type: "smallint", nullable: false),
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0),
                     DateInscription = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
@@ -67,7 +67,7 @@ namespace WicodeApi.Migrations
                     Reference = table.Column<string>(type: "text", nullable: true),
                     InscriptionId = table.Column<int>(type: "integer", nullable: false),
                     DatePayement = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Etat = table.Column<int>(type: "smallint", nullable: false)
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0)
                 },
                 constraints: table =>
                 {
@@ -82,7 +82,7 @@ namespace WicodeApi.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Value = table.Column<string>(type: "text", nullable: true),
-                    Etat = table.Column<int>(type: "smallint", nullable: false)
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0)
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,7 @@ namespace WicodeApi.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Completion = table.Column<int>(type: "integer", nullable: false),
-                    Etat = table.Column<int>(type: "smallint", nullable: false),
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0),
                     SkillDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
@@ -115,7 +115,7 @@ namespace WicodeApi.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     DateAjout = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     DateFin = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Etat = table.Column<int>(type: "smallint", nullable: false),
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0),
                     CategorieId = table.Column<int>(type: "integer", nullable: false),
                     Lien = table.Column<string>(type: "text", nullable: true),
                     Note = table.Column<string>(type: "text", nullable: true)
@@ -166,7 +166,7 @@ namespace WicodeApi.Migrations
                     Libelle = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
                     Lien = table.Column<string>(type: "text", nullable: true),
-                    Etat = table.Column<int>(type: "smallint", nullable: false),
+                    Etat = table.Column<int>(type: "smallint", nullable: false, defaultValue:0),
                     DateAjout = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ProjetId = table.Column<int>(type: "integer", nullable: false)
                 },
