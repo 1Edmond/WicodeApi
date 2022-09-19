@@ -43,13 +43,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "CryptoAPi",
-        Description = "Api de l'applicaiton de crytprographie",
+        Title = "Wicode api",
+        Description = "Wicode api",
         Contact = new OpenApiContact
         {
             Name = "Honyiglo Wilfried",
