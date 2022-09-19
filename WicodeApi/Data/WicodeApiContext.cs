@@ -8,7 +8,7 @@ public class WicodeApiContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@"Host=ec2-54-204-241-136.compute-1.amazonaws.com;Username=txmwmwfrxofkfk;Password=bacc105f9c8727672368fcad96af94fde9e1a267f21b31ca931af50afd78b4e4;Database=damfo3htosel2k");
+        => optionsBuilder.UseNpgsql(@"Host=ec2-34-200-205-45.compute-1.amazonaws.com;Username=nuxaflmexzdbby;Password=a3361bf1b0f37009ec064d116d9325d1ee5752aab6302ad8af1bfa4bbe663703;Database=ddns8d0vef4lc3");
 
 
     public DbSet<Inscription> Inscriptions { get; set; } = default!;
