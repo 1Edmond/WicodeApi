@@ -396,7 +396,7 @@ public class PortFolioController : Controller
 
     [HttpGet]
     [Route("projets/{id:int}/ressources")]
-    public ActionResult<string> GetProjetRessource(int id)
+    public ActionResult<string> GetProjetRessources(int id)
     {
        
         var projet = _context.Projets.Find(id);
@@ -419,18 +419,42 @@ public class PortFolioController : Controller
             return NotFound();
         else
         {
-            var projetFeature = _context.ProjetFeatures.Where(p => p.ProjetId == id).Select(d => d.Id).ToList();
-            var ressources = _context.Features.Where(p => projetFeature.Contains(p.Id)).ToList();
-            return Ok(JsonConvert.SerializeObject(ressources));
+            var projetFeature = _context.ProjetFeatures.Where(p => p.ProjetId == id).Select(d => d.FeatureId).ToList();
+            var features = _context.Features.Where(p => projetFeature.Contains(p.Id)).ToList();
+            return Ok(JsonConvert.SerializeObject(features));
         }
     }
 
 
+    [HttpPut]
+    [Route("projets/{id:int}/features/update")]
+    public ActionResult<string> UpdatePojetFeature(int id, List<int> features)
+    {
+        if(_context.Projets.Any(p => p.Id == id))
+        {
+            var projetFeature = _context.ProjetFeatures.Where(p => p.ProjetId == id).ToList();
+            projetFeature.ForEach(x =>
+            {
+                if (!features.Contains(x.FeatureId))
+                    _context.ProjetFeatures.Remove(x);
+            });
 
+             _context.SaveChanges();
+            features.ForEach( x =>
+            {
+                if (!projetFeature.Any(y => y.FeatureId == x))
+                    _context.Add(new ProjetFeature()
+                    {
+                        FeatureId = x,
+                        ProjetId = id
+                    });
+            });
+            _context.SaveChanges();
+            return Ok();
 
-
-
-
+        }
+        return NotFound();
+    }
 
     #endregion
 
