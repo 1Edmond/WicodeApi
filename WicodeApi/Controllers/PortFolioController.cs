@@ -404,8 +404,8 @@ public class PortFolioController : Controller
             return NotFound();
         else
         {
-            var ressources = _context.Ressources.Where(p => p.ProjetId == id).ToList();
-            return Ok(JsonConvert.SerializeObject(ressources));
+            var ressources = _context.Ressources.Where(p => p.ProjetId == id && p.Etat == 0).ToList();
+            return Ok(JsonConvert.SerializeObject(ressources, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
     }
     
@@ -421,7 +421,7 @@ public class PortFolioController : Controller
         {
             var projetFeature = _context.ProjetFeatures.Where(p => p.ProjetId == id).Select(d => d.FeatureId).ToList();
             var features = _context.Features.Where(p => projetFeature.Contains(p.Id)).ToList();
-            return Ok(JsonConvert.SerializeObject(features));
+            return Ok(JsonConvert.SerializeObject(features, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
     }
 
