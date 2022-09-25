@@ -108,6 +108,25 @@ public class PortFolioController : Controller
         }
         return Problem(statusCode: 300, title: "Erreur", detail: "Il existe une fonctionnalite avec ce libelle.");
     }
+    
+    [HttpPost]
+    [Route("features/{id:int}/add")]
+    public ActionResult<string> AddProjetFeatureFeature(int id, Feature feature)
+    {
+        if (!_context.Features.Any(c => c.Libelle == feature.Libelle))
+        {
+           var f = _context.Add<Feature>(feature);
+            _context.SaveChanges();
+            _context.Add(new ProjetFeature
+            {
+                FeatureId = f.Entity.Id,
+                ProjetId = id
+            });
+            _context.SaveChanges();
+            return Ok();
+        }
+        return Problem(statusCode: 300, title: "Erreur", detail: "Il existe une fonctionnalite avec ce libelle.");
+    }
 
     [HttpPut]
     [Route("features/update")]
