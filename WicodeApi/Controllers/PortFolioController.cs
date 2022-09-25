@@ -343,7 +343,7 @@ public class PortFolioController : Controller
     [Route("projets")]
     public ActionResult<string> Getprojets()
     {
-        List<Projet> result = _context.Projets.Where(c => c.Etat == 0).ToList();
+        List<Projet> result = _context.Projets.Where(c => c.Etat != 1).ToList();
         return JsonConvert.SerializeObject(result);
     }
 
