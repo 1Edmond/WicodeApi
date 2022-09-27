@@ -49,7 +49,6 @@ public class CryptographieController : ControllerBase
     }
     [HttpGet]
     [Route("inscriptions/exist/{contact}")]
-    [Authorize(Roles = "Admin")]
     public ActionResult<string> ExistInscription(string contact)
     {
         var result = new ApiResult<Inscription>();
