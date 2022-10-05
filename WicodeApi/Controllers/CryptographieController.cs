@@ -25,6 +25,22 @@ public class CryptographieController : ControllerBase
         };
         return JsonConvert.SerializeObject(result);
     }
+    
+    [HttpGet]
+    [Route("inscriptions/{id:int}/payements/validate")]
+    [Authorize(Roles = "Admin")]
+    public ActionResult<string> ValidateInscription(int id)
+    {
+        var payements = _context.Payements.Where(p => p.InscriptionId == id).ToList();
+        payements.ForEach(x => x.Etat = 2);
+        _context.UpdateRange(payements);
+        ApiResult<Inscription> result = new()
+        {
+            StatusCode = "200",
+            Message = $"Réussie",
+        };
+        return JsonConvert.SerializeObject(result);
+    }
 
     [HttpGet]
     [Route("inscriptions/{id:int}")]
