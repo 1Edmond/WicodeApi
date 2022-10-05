@@ -34,6 +34,7 @@ public class CryptographieController : ControllerBase
         var payements = _context.Payements.Where(p => p.InscriptionId == id).ToList();
         payements.ForEach(x => x.Etat = 2);
         _context.UpdateRange(payements);
+        _context.SaveChanges();
         ApiResult<Inscription> result = new()
         {
             StatusCode = "200",
