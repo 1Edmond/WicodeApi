@@ -125,9 +125,9 @@ public class CryptographieController : ControllerBase
         {
             result.Element = _context.Inscriptions.Find(id);
             _context.Inscriptions.Remove(result.Element);
+            _context.SaveChanges();
             result.Message = "Suprresion réussie.";
             result.StatusCode = "200";
-            _context.SaveChanges();
         }
         else
         {
@@ -263,7 +263,7 @@ public class CryptographieController : ControllerBase
             {
                 _context.Payements.Remove(result.Element);
                 result.Message = "Suprresion réussie.";
-                result.StatusCode = "404";
+                result.StatusCode = "200";
                 _context.SaveChanges();
             }
         }
